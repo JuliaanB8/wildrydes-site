@@ -61,7 +61,7 @@ let map;
             displayUpdate(unicorn.Name + ' has arrived. Giddy up!', unicorn.Color);
             WildRydes.map.unsetLocation();
 
-            updateWeather("Fort Worth", "80", "1021", "62", "15mph");
+            // updateWeather("Fort Worth", "80", "1021", "62", "15mph");
 
             $('#request').prop('disabled', 'disabled');
             $('#request').text('Set Pickup');
