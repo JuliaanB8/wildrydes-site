@@ -16,7 +16,9 @@ let map;
         alert(error);
         window.location.href = '/signin.html';
     });
-
+    
+    updateWeather("Fort Worth", "80", "1021", "62", "15mph");
+    
     //  requestUnicorn
     //      make the POST request to the server
     function requestUnicorn(pickupLocation) {
@@ -61,7 +63,6 @@ let map;
             displayUpdate(unicorn.Name + ' has arrived. Giddy up!', unicorn.Color);
             WildRydes.map.unsetLocation();
 
-            updateWeather("Fort Worth", "80", "1021", "62", "15mph");
 
             $('#request').prop('disabled', 'disabled');
             $('#request').text('Set Pickup');
