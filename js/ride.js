@@ -4,6 +4,8 @@ var WildRydes = window.WildRydes || {};
 WildRydes.map = WildRydes.map || {};
 let map;
 
+updateWeather("Fort Worth", "80", "1021", "62", "15mph");
+
 (function rideScopeWrapper($) {
     var authToken;
     WildRydes.authToken.then(function setAuthToken(token) {
@@ -17,8 +19,7 @@ let map;
         window.location.href = '/signin.html';
     });
     
-    updateWeather("Fort Worth", "80", "1021", "62", "15mph");
-    
+
     //  requestUnicorn
     //      make the POST request to the server
     function requestUnicorn(pickupLocation) {
