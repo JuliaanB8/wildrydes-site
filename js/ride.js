@@ -181,10 +181,10 @@ function displayUpdate(text, color='green') {
     $('#updates').prepend($(`<li style="background-color:${color}">${text}</li>`));
 }
 function updateWeather(city, temperature, pressure, humidity, windSpeed){
-    document.querySelector("#city").innerHTML = "City: " + city;
-    document.querySelector("#temp").innerHTML = "Temperature: " + temperature;
-    document.querySelector("#press").innerHTML = "Pressure: " + pressure;
-    document.querySelector("#humidity").innerHTML = "Humidity: " + humidity;
-    document.querySelector("#wind").innerHTML = "Wind Speed: " + windSpeed;
+    $('#city').text('City:' + city);
+    $('#temp').text('Temperature:' + temperature);
+    $('#press').text('Pressure:' + pressure);
+    $('#humidity').text('Humidity:' + humidity);
+    $('#wind').text('Wind Speed:' + windSpeed);
 }
 
