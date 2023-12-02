@@ -16,7 +16,7 @@ html, body, #main, #map {
 
 .weather {
     position: absolute;
-    right: 285px;
+    right: 295px;
     top: 10px;
     z-index: 100;
     width: 275px;
