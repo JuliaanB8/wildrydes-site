@@ -55,13 +55,13 @@ let map;
 
         console.log(pickupLocation);
         //  get the local weather, find nearby restaurants, movies
-        getWeather(pickupLocation, unicorn)
+        getWeather(pickupLocation, unicorn);
 
         animateArrival(function animateCallback() {
             displayUpdate(unicorn.Name + ' has arrived. Giddy up!', unicorn.Color);
             WildRydes.map.unsetLocation();
 
-            // updateWeather("Fort Worth", "80", "1021", "62", "15mph");
+            updateWeather("Fort Worth", "80", "1021", "62", "15mph");
 
             $('#request').prop('disabled', 'disabled');
             $('#request').text('Set Pickup');
@@ -181,16 +181,10 @@ function displayUpdate(text, color='green') {
     $('#updates').prepend($(`<li style="background-color:${color}">${text}</li>`));
 }
 function updateWeather(city, temperature, pressure, humidity, windSpeed){
-    let Hcity = document.querySelector("li:nth-child(1)").innerText;
-    let Htemp = document.querySelector("li:nth-child(2)").innerText;
-    let Hpress = document.querySelector("li:nth-child(3)").innerText;
-    let Hhumidity = document.querySelector("li:nth-child(4)").innerText;
-    let Hwind = document.querySelector("li:nth-child(5)").innerText;
-
-    Hcity = "City: " + city;
-    Htemp = "Temperature: " + temperature;
-    Hpress = "Pressure: " + pressure;
-    Hhumidity = "Humidity: " + humidity;
-    Hwind = "Wind Speed: " + windSpeed;
+    document.querySelector("#city").innerHTML = "City: " + city;
+    document.querySelector("#temp").innerHTML = "Temperature: " + temperature;
+    document.querySelector("#press").innerHTML = "Pressure: " + pressure;
+    document.querySelector("#humidity").innerHTML = "Humidity: " + humidity;
+    document.querySelector("#wind").innerHTML = "Wind Speed: " + windSpeed;
 }
 
