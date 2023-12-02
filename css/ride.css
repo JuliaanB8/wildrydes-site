@@ -21,6 +21,7 @@ html, body, #main, #map {
     z-index: 100;
     width: 275px;
     background: transparent;
+    text-align: center;
 }
 
 .info .panel-body {
