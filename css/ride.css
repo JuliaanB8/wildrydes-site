@@ -18,11 +18,14 @@ html, body, #main, #map {
     position: absolute;
     right: 295px;
     top: 10px;
-    height: 55px;
     z-index: 100;
     width: 275px;
     background: transparent;
     text-align: center;
+}
+
+.panel-heading h3 {
+    font-size: 16px;
 }
 
 .info .panel-body {
@@ -61,6 +64,13 @@ html, body, #main, #map {
     background-color: #f7f7f7;
     padding: 5px;
 }
+
+#forecast {
+    list-style: none;
+    margin-top: 5px;
+    padding: 0;
+}
+
 
 .authToken {
     word-wrap: break-word;
