@@ -160,10 +160,10 @@ let map;
                     var temperature = data['main']['temp'];
                     var windSpeed = data['wind']['speed'];
                     
-                    $('#city').text('City: ' + city);
+                    $('#city').text(city);
                     $('#desc').text(descValue);
-                    $('#temp').text('Temperature: ' + temperature + " faranheit");
-                    $('#wind').text('Wind Speed: ' + windSpeed);
+                    $('#temp').text(temperature + "\u00B0 Fahrenheit");
+                    $('#wind').text('Wind Speed: ' + windSpeed + ' mph');
                 })
             
                 .catch(err => alert("Wrong coords!"))
@@ -189,9 +189,6 @@ let map;
             
             WildRydes.map.animate(origin, dest, callback);
         }
-        
-        // updateWeather("Fort Worth", "80", "1021", "62", "15mph");
-        
     }(jQuery));
     
     //  these functions below here are my utility functions
@@ -203,13 +200,3 @@ let map;
     function displayUpdate(text, color='green') {
         $('#updates').prepend($(`<li style="background-color:${color}">${text}</li>`));
     }
-    
-    // UpdateWeather
-    function updateWeather(city, descValue,temperature, windSpeed){
-        $('#city').text('City: ' + city);
-        $('#desc').text(descValue);
-        $('#temp').text('Temperature: ' + temperature + " faranheit");
-        $('#wind').text('Wind Speed: ' + windSpeed);
-    }
-    
-    
