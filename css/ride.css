@@ -24,7 +24,7 @@ html, body, #main, #map {
     text-align: center;
 }
 
-.info .weather .panel-body {
+.info .panel-body {
     background: transparent;
 }
 
