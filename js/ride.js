@@ -141,7 +141,7 @@ let map;
     function handleRequestClick(event) {
         var pickupLocation =  WildRydes.map.selectedPoint;
         
-        //setWeather(pickupLocation);
+        setWeather(pickupLocation);
 
         event.preventDefault();
         requestUnicorn(pickupLocation);
@@ -187,7 +187,7 @@ let map;
         WildRydes.map.animate(origin, dest, callback);
     }
 
-    
+
 }(jQuery));
 
 //  these functions below here are my utility functions

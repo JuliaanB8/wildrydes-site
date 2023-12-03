@@ -14,7 +14,7 @@ html, body, #main, #map {
     background: transparent;
 }
 
-/* .weather {
+.weather {
     position: absolute;
     left: 10px;
     bottom: 10px;
@@ -22,7 +22,7 @@ html, body, #main, #map {
     width: 275px;
     background: transparent;
     text-align: center;
-} */
+}
 
 .info .panel-body {
     background: transparent;
@@ -47,7 +47,7 @@ html, body, #main, #map {
     background: inherit;
 }
 
-#updates {
+#updates, #forecast{
     list-style: none;
     margin-top: 5px;
     padding: 0;
