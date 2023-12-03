@@ -141,30 +141,30 @@ let map;
     function handleRequestClick(event) {
         var pickupLocation =  WildRydes.map.selectedPoint;
         
-        setWeather(pickupLocation);
+        //setWeather(pickupLocation);
 
         event.preventDefault();
         requestUnicorn(pickupLocation);
     }
 
     // setWeather
-    function setWeather(pickupLocation){
-        fetch('https://api.openweathermap.org/data/2.5/weather?lat='+pickupLocation.latitude+'&lon='+pickupLocation.longitude+'&units=imperial&appid=6058549b8066ed39eb6209a0acafd9ae')
-            .then(response => response.json())
-            .then(data => {
-                var city = data['name'];
-                var descValue = data['weather'][0]['description'];
-                var temperature = data['main']['temp'];
-                var windSpeed = data['wind']['speed'];
+    // function setWeather(pickupLocation){
+    //     fetch('https://api.openweathermap.org/data/2.5/weather?lat='+pickupLocation.latitude+'&lon='+pickupLocation.longitude+'&units=imperial&appid=6058549b8066ed39eb6209a0acafd9ae')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             var city = data['name'];
+    //             var descValue = data['weather'][0]['description'];
+    //             var temperature = data['main']['temp'];
+    //             var windSpeed = data['wind']['speed'];
                 
-                $('#city').text(city);
-                $('#desc').text(descValue);
-                $('#temp').text(temperature + "\u00B0 Fahrenheit");
-                $('#wind').text('Wind Speed: ' + windSpeed + ' mph');
-            })
+    //             $('#city').text(city);
+    //             $('#desc').text(descValue);
+    //             $('#temp').text(temperature + "\u00B0 Fahrenheit");
+    //             $('#wind').text('Wind Speed: ' + windSpeed + ' mph');
+    //         })
         
-            .catch(err => alert("Wrong coords!"));
-    }
+    //         .catch(err => alert("Wrong coords!"));
+    // }
     
     //  animateArrival
     //      animate the Unicorn's arrival to the user's pickup location
