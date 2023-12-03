@@ -153,7 +153,7 @@ let map;
         // setWeather
         function setWeather(){
             var pickupLocation = WildRydes.map.selectedPoint;
-            fetch('https://api.openweathermap.org/data/2.5/weather?lat='+pickupLocation.latitude+'&lon='+pickupLocation.longitude+'&units=imperial&appid=6058549b8066ed39eb6209a0acafd9ae')
+            fetch('https://api.openweathermap.org/data/2.5/weather?lat='+WildRydes.map.center.latitude+'&lon='+WildRydes.map.center.longitude+'&units=imperial&appid=6058549b8066ed39eb6209a0acafd9ae')
                 .then(response => response.json())
                 .then(data => {
                     var city = data['name'];
