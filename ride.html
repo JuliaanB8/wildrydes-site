@@ -38,37 +38,21 @@
     -->
 
     <div class="info panel panel-default">
-        <div class="left-panel">
-            <div class="panel-heading">
-                <button id="request" class="btn btn-primary" disabled="disabled">Set pickup</button>
-                <div class="dropdown pull-right">
-                    <button id="accountLink" class="btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Account <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="accountLink">
-                        <li><a id="signOut" href="#">Sign out</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="panel-body">
-                <ol id="updates">
-                    <li>Welcome! Click the map to set your pickup location.</li>
-                </ol>
+        <div class="panel-heading">
+            <button id="request" class="btn btn-primary" disabled="disabled">Set pickup</button>
+            <div class="dropdown pull-right">
+                <button id="accountLink" class="btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Account <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="accountLink">
+                    <li><a id="signOut" href="#">Sign out</a></li>
+                </ul>
             </div>
         </div>
-
-        <div class="right-panel">
-            <div class="panel-heading">
-                <h2>Weather In Your Area</h2>
-            </div>
-            <div class="panel-body">
-                <ol id="forecast">
-                    <li id="city">Request a Unicorn to see the weather report around your pickup location</li>
-                    <li id="desc"></li>
-                    <li id="temp"></li>
-                    <li id="wind"></li>
-                </ol>
-            </div>
+        <div class="panel-body">
+            <ol id="updates">
+                <li>Welcome! Click the map to set your pickup location.</li>
+            </ol>
         </div>
     </div>
 
