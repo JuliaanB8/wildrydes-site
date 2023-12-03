@@ -128,6 +128,8 @@ let map;
                     //     .setContent("You clicked the map at " + e.latlng.toString())
                     //     .openOn(map);
                 }
+                
+                setWeather();
             }
         });
         
@@ -146,6 +148,26 @@ let map;
             
             event.preventDefault();
             requestUnicorn(pickupLocation);
+        }
+
+        // setWeather
+        function setWeather(){
+            var pickupLocation = WildRydes.map.selectedPoint;
+            fetch('https://api.openweathermap.org/data/2.5/weather?lat='+pickupLocation.latitude+'&lon='+pickupLocation.longitude+'&units=imperial&appid=6058549b8066ed39eb6209a0acafd9ae')
+                .then(response => response.json())
+                .then(data => {
+                    var city = data['name'];
+                    var descValue = data['weather'][0]['description'];
+                    var temperature = data['main']['temp'];
+                    var windSpeed = data['wind']['speed'];
+                    
+                    $('#city').text('City: ' + city);
+                    $('#desc').text(descValue);
+                    $('#temp').text('Temperature: ' + temperature + " faranheit");
+                    $('#wind').text('Wind Speed: ' + windSpeed);
+                })
+            
+                .catch(err => alert("Wrong coords!"))
         }
         
         //  animateArrival
@@ -169,7 +191,7 @@ let map;
             WildRydes.map.animate(origin, dest, callback);
         }
         
-        updateWeather("Fort Worth", "80", "1021", "62", "15mph");
+        // updateWeather("Fort Worth", "80", "1021", "62", "15mph");
         
     }(jQuery));
     
@@ -184,12 +206,11 @@ let map;
     }
     
     // UpdateWeather
-    function updateWeather(city, temperature, pressure, humidity, windSpeed){
-        $('#city').text('City:' + city);
-        $('#temp').text('Temperature:' + temperature);
-        $('#press').text('Pressure:' + pressure);
-        $('#humidity').text('Humidity:' + humidity);
-        $('#wind').text('Wind Speed:' + windSpeed);
+    function updateWeather(city, descValue,temperature, windSpeed){
+        $('#city').text('City: ' + city);
+        $('#desc').text(descValue);
+        $('#temp').text('Temperature: ' + temperature + " faranheit");
+        $('#wind').text('Wind Speed: ' + windSpeed);
     }
     
     
