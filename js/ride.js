@@ -144,7 +144,7 @@ let map;
         function handleRequestClick(event) {
             var pickupLocation =  WildRydes.map.selectedPoint;
             
-            setWeather(pickupLocation);
+            //setWeather(pickupLocation);
 
             event.preventDefault();
             requestUnicorn(pickupLocation);
