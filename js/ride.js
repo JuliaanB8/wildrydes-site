@@ -4,7 +4,6 @@ var WildRydes = window.WildRydes || {};
 WildRydes.map = WildRydes.map || {};
 let map;
 
-
 (function rideScopeWrapper($) {
     var authToken;
     WildRydes.authToken.then(function setAuthToken(token) {
@@ -17,7 +16,6 @@ let map;
         alert(error);
         window.location.href = '/signin.html';
     });
-    
     
     //  requestUnicorn
     //      make the POST request to the server
@@ -63,7 +61,6 @@ let map;
             displayUpdate(unicorn.Name + ' has arrived. Giddy up!', unicorn.Color);
             WildRydes.map.unsetLocation();
             
-            
             $('#request').prop('disabled', 'disabled');
             $('#request').text('Set Pickup');
         });
@@ -85,7 +82,7 @@ let map;
         }
         
         window.navigator.geolocation
-        .getCurrentPosition(setLocation);
+            .getCurrentPosition(setLocation);
         
         //  put the map behind the updates list
         document.getElementById("map").style.zIndex = "10";
@@ -102,101 +99,103 @@ let map;
             WildRydes.map.extent = {minLat: b._northEast.lat, minLng: b._northEast.lng,
                 maxLat: b._southWest.lat, maxLng: b._southWest.lng};
                 
-                WildRydes.marker  = L.marker([loc.coords.latitude, loc.coords.longitude]).addTo(map);
-                var myIcon = L.icon({
-                    iconUrl: 'images/unicorn-icon.png',
-                    iconSize: [25, 25],
-                    iconAnchor: [22, 24],
-                    shadowSize: [25, 25],
-                    shadowAnchor: [22, 24]
-                });
-                WildRydes.unicorn = L.marker([loc.coords.latitude, loc.coords.longitude], {icon: myIcon}).addTo(map);
-                // WildRydes.marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+            WildRydes.marker  = L.marker([loc.coords.latitude, loc.coords.longitude]).addTo(map);
+            var myIcon = L.icon({
+                iconUrl: 'images/unicorn-icon.png',
+                iconSize: [25, 25],
+                iconAnchor: [22, 24],
+                shadowSize: [25, 25],
+                shadowAnchor: [22, 24]
+            });
+            WildRydes.unicorn = L.marker([loc.coords.latitude, loc.coords.longitude], {icon: myIcon}).addTo(map);
+            // WildRydes.marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+            
+            // var popup = L.popup();
+            map.on('click', onMapClick);
+            
+            function onMapClick(e) {            //  TODO move to esri.js
+                WildRydes.map.selectedPoint = {longitude: e.latlng.lng, latitude: e.latlng.lat};
+                if (WildRydes.marker)       WildRydes.marker.remove();
+                handlePickupChanged();
                 
-                // var popup = L.popup();
-                map.on('click', onMapClick);
+                WildRydes.marker  = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
                 
-                function onMapClick(e) {            //  TODO move to esri.js
-                    WildRydes.map.selectedPoint = {longitude: e.latlng.lng, latitude: e.latlng.lat};
-                    if (WildRydes.marker)       WildRydes.marker.remove();
-                    handlePickupChanged();
-                    
-                    WildRydes.marker  = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
-                    
-                    // popup
-                    //     .setLatLng(e.latlng)
-                    //     .setContent("You clicked the map at " + e.latlng.toString())
-                    //     .openOn(map);
-                }   
-            }
-        });
-        
-        //  handlePickupChanged
-        //      enable the Pickup button and set text to Request Unicorn
-        function handlePickupChanged() {
-            var requestButton = $('#request');
-            requestButton.text('Request Unicorn');
-            requestButton.prop('disabled', false);
+                // popup
+                //     .setLatLng(e.latlng)
+                //     .setContent("You clicked the map at " + e.latlng.toString())
+                //     .openOn(map);
+            }   
         }
-        
-        //  handleRequestClick
-        //      get current request location and POST request to server
-        function handleRequestClick(event) {
-            var pickupLocation =  WildRydes.map.selectedPoint;
-            
-            //setWeather(pickupLocation);
-
-            event.preventDefault();
-            requestUnicorn(pickupLocation);
-        }
-
-        // setWeather
-        function setWeather(pickupLocation){
-            fetch('https://api.openweathermap.org/data/2.5/weather?lat='+pickupLocation.latitude+'&lon='+pickupLocation.longitude+'&units=imperial&appid=6058549b8066ed39eb6209a0acafd9ae')
-                .then(response => response.json())
-                .then(data => {
-                    var city = data['name'];
-                    var descValue = data['weather'][0]['description'];
-                    var temperature = data['main']['temp'];
-                    var windSpeed = data['wind']['speed'];
-                    
-                    $('#city').text(city);
-                    $('#desc').text(descValue);
-                    $('#temp').text(temperature + "\u00B0 Fahrenheit");
-                    $('#wind').text('Wind Speed: ' + windSpeed + ' mph');
-                })
-            
-                .catch(err => alert("Wrong coords!"))
-        }
-        
-        //  animateArrival
-        //      animate the Unicorn's arrival to the user's pickup location
-        function animateArrival(callback) {
-            var dest = WildRydes.map.selectedPoint;
-            var origin = {};
-            
-            if (dest.latitude > WildRydes.map.center.latitude) {
-                origin.latitude = WildRydes.map.extent.minLat;
-            } else {
-                origin.latitude = WildRydes.map.extent.maxLat;
-            }
-            
-            if (dest.longitude > WildRydes.map.center.longitude) {
-                origin.longitude = WildRydes.map.extent.minLng;
-            } else {
-                origin.longitude = WildRydes.map.extent.maxLng;
-            }
-            
-            WildRydes.map.animate(origin, dest, callback);
-        }
-    }(jQuery));
+    });
     
-    //  these functions below here are my utility functions
-    //      to present messages to users
-    //      and to particularly add some 'sizzle' to the application
-    
-    //  displayUpdate
-    //      nice utility method to show message to user
-    function displayUpdate(text, color='green') {
-        $('#updates').prepend($(`<li style="background-color:${color}">${text}</li>`));
+    //  handlePickupChanged
+    //      enable the Pickup button and set text to Request Unicorn
+    function handlePickupChanged() {
+        var requestButton = $('#request');
+        requestButton.text('Request Unicorn');
+        requestButton.prop('disabled', false);
     }
+    
+    //  handleRequestClick
+    //      get current request location and POST request to server
+    function handleRequestClick(event) {
+        var pickupLocation =  WildRydes.map.selectedPoint;
+        
+        //setWeather(pickupLocation);
+
+        event.preventDefault();
+        requestUnicorn(pickupLocation);
+    }
+
+    // setWeather
+    function setWeather(pickupLocation){
+        fetch('https://api.openweathermap.org/data/2.5/weather?lat='+pickupLocation.latitude+'&lon='+pickupLocation.longitude+'&units=imperial&appid=6058549b8066ed39eb6209a0acafd9ae')
+            .then(response => response.json())
+            .then(data => {
+                var city = data['name'];
+                var descValue = data['weather'][0]['description'];
+                var temperature = data['main']['temp'];
+                var windSpeed = data['wind']['speed'];
+                
+                $('#city').text(city);
+                $('#desc').text(descValue);
+                $('#temp').text(temperature + "\u00B0 Fahrenheit");
+                $('#wind').text('Wind Speed: ' + windSpeed + ' mph');
+            })
+        
+            .catch(err => alert("Wrong coords!"));
+    }
+    
+    //  animateArrival
+    //      animate the Unicorn's arrival to the user's pickup location
+    function animateArrival(callback) {
+        var dest = WildRydes.map.selectedPoint;
+        var origin = {};
+        
+        if (dest.latitude > WildRydes.map.center.latitude) {
+            origin.latitude = WildRydes.map.extent.minLat;
+        } else {
+            origin.latitude = WildRydes.map.extent.maxLat;
+        }
+        
+        if (dest.longitude > WildRydes.map.center.longitude) {
+            origin.longitude = WildRydes.map.extent.minLng;
+        } else {
+            origin.longitude = WildRydes.map.extent.maxLng;
+        }
+        
+        WildRydes.map.animate(origin, dest, callback);
+    }
+
+    
+}(jQuery));
+
+//  these functions below here are my utility functions
+//      to present messages to users
+//      and to particularly add some 'sizzle' to the application
+
+//  displayUpdate
+//      nice utility method to show message to user
+function displayUpdate(text, color='green') {
+    $('#updates').prepend($(`<li style="background-color:${color}">${text}</li>`));
+}
