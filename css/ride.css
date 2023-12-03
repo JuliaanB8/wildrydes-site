@@ -24,10 +24,6 @@ html, body, #main, #map {
     text-align: center;
 }
 
-.weather h2 {
-    font-size: 20px;
-}
-
 .info .panel-body {
     background: transparent;
 }
