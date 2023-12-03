@@ -88,7 +88,7 @@ let map;
         .getCurrentPosition(setLocation);
         
         //  put the map behind the updates list
-        document.getElementById("map").style.zIndex = "10";
+        document.getElementById("map").style.zIndex = "1";
         
         function setLocation(loc) {
             map = L.map('map').setView([loc.coords.latitude, loc.coords.longitude], 13);
